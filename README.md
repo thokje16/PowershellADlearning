@@ -1,5 +1,6 @@
-```markdown
 # Active Directory and Windows Server Automation Scripts
+```markdown
+
 
 This repository contains PowerShell scripts designed to automate common Active Directory (AD) tasks and Windows Server maintenance. The scripts included in this repository help IT administrators efficiently manage AD users, groups, and perform routine maintenance on Windows servers.
 
@@ -107,5 +108,3 @@ Feel free to fork this repository and submit pull requests for any improvements 
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 ```
-
-This markdown version of the README will include the details for your `updater.ps1` script along with instructions on how to use it. Let me know if you'd like any further modifications!
