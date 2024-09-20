@@ -1,5 +1,3 @@
-Here's the `README.md` section in proper markdown format that you can directly copy and paste into your `README.md` file:
-
 ```markdown
 # Active Directory and Windows Server Automation Scripts
 
