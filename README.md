@@ -1,6 +1,4 @@
 # Active Directory and Windows Server Automation Scripts
-```markdown
-
 
 This repository contains PowerShell scripts designed to automate common Active Directory (AD) tasks and Windows Server maintenance. The scripts included in this repository help IT administrators efficiently manage AD users, groups, and perform routine maintenance on Windows servers.
 
@@ -10,25 +8,24 @@ This repository contains PowerShell scripts designed to automate common Active D
 
 This script is designed to add users to specific groups in Active Directory, focusing on nested group structures. It creates groups if they don't already exist and ensures that users are assigned to the correct groups.
 
-[**Learn more about `addtogroups.ps1`**](#1-addtogroupsps1)
+
 
 ### 2. `bulkuser4.ps1`
 
 This script automates the bulk creation of Active Directory users based on a CSV file input. It normalizes non-standard characters in usernames and ensures that the correct Organizational Units (OUs) and groups are used for the users being created.
 
-[**Learn more about `bulkuser4.ps1`**](#2-bulkuser4ps1)
 
 ### 3. `userreport.ps1`
 
 This script generates a comprehensive report of all users in Active Directory, including their name, department, phone number, email address, and last login time. The report is exported to a CSV file for further analysis or record-keeping.
 
-[**Learn more about `userreport.ps1`**](#3-userreportps1)
+
 
 ### 4. `ServerMaintenance.ps1`
 
 This script automates remote maintenance tasks on multiple Windows Servers. It checks the status of installed services, installs software updates if certain conditions are met, and reboots the servers if required. It also sets up a scheduled task to run the script weekly.
 
-[**Learn more about `ServerMaintenance.ps1**](#4-servermaintenanceps1)
+
 
 ### 5. `updater.ps1`
 
