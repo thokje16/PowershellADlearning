@@ -1,112 +1,95 @@
-### `README.md`
+Active Directory and Windows Server Automation Scripts
 
-```markdown
-# Active Directory Automation Scripts
+This repository contains PowerShell scripts designed to automate common Active Directory (AD) tasks and Windows Server maintenance. The scripts included in this repository help IT administrators efficiently manage AD users, groups, and perform routine maintenance on Windows servers.
+Scripts
+1. addtogroups.ps1
 
-This repository contains PowerShell scripts designed to automate common Active Directory (AD) tasks such as user management, group membership, and reporting. The scripts included in this repository are designed to help IT administrators efficiently manage AD users and groups.
+This script is designed to add users to specific groups in Active Directory, focusing on nested group structures. It creates groups if they don't already exist and ensures that users are assigned to the correct groups.
 
-## Scripts
 
-### 1. `addtogroups.ps1`
-This script is designed to add users to specific groups in Active Directory, especially focusing on nested group structures. It creates groups if they don't already exist and ensures that users are assigned to the correct groups.
+2. bulkuser4.ps1
 
-#### Features:
-- Ensures the creation of nested groups under a parent group (such as Sales).
-- Moves specific users to designated subgroups (e.g., sales representatives).
-- Provides verbose output indicating the progress and any errors encountered.
-
-#### Usage:
-1. Modify the script with the appropriate group names and user accounts.
-2. Run the script with an account that has permissions to modify Active Directory group memberships.
-
-#### Example:
-To add users to the `g_Salgsrepresentanter` group:
-
-```bash
-# Example user list
-$salesRepsMembers = @("erik.johansen", "per.pedersen", "bjorn.a.olsen")
-```
-
-### 2. `bulkuser4.ps1`
 This script automates the bulk creation of Active Directory users based on a CSV file input. It normalizes non-standard characters in usernames and ensures that the correct Organizational Units (OUs) and groups are used for the users being created.
 
-#### Features:
-- Reads user data from a CSV file.
-- Normalizes non-standard letters (e.g., `æ`, `ø`, `å`).
-- Automatically assigns users to the correct OU based on their department.
-- Ensures that users are added to appropriate groups after creation.
-- Implements error handling to catch potential issues during user creation.
 
-#### CSV File Format:
-The script expects a CSV file with the following columns:
-- `Fornavn` (First Name)
-- `Midt initial` (Middle Initial)
-- `Etternavn` (Last Name)
-- `User login name`
-- `Avdeling` (Department)
-- `Passord` (Password)
-- `mobiltelefon` (Phone number)
+3. userreport.ps1
 
-#### Usage:
-1. Ensure the CSV file is properly formatted.
-2. Set the appropriate file path in the script:
-   ```bash
-   $csvPath = "C:\path\to\your\Userscurrent3.csv"
-   ```
-3. Run the script as an administrator.
-
-### 3. `userreport.ps1`
 This script generates a comprehensive report of all users in Active Directory, including their name, department, phone number, email address, and last login time. The report is exported to a CSV file for further analysis or record-keeping.
 
-#### Features:
-- Retrieves user details from AD such as name, department, phone number, email, and last login time.
-- Exports the user data to a CSV file.
-- Implements error handling to catch any problems during execution.
+4. ServerMaintenance.ps1
 
-#### Usage:
-1. Modify the export path in the script if necessary:
-   ```bash
-   $exportPath = "C:\Reports\UsersReport.csv"
-   ```
-2. Run the script to generate the report.
-3. The report will be saved as a CSV file, which can be opened in Excel or any other spreadsheet program.
+This script automates remote maintenance tasks on multiple Windows Servers. It checks the status of installed services, installs software updates if certain conditions are met, and reboots the servers if required. It also sets up a scheduled task to run the script weekly.
 
-## Requirements
-- PowerShell 5.0 or above.
-- Active Directory module for Windows PowerShell (Import-Module ActiveDirectory).
-- Appropriate permissions to create, update, and report on Active Directory users and groups.
 
-## Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/ADAutomationScripts.git
-   ```
-2. Modify the scripts as necessary to fit your Active Directory environment.
-3. Run the scripts with sufficient permissions (domain admin or delegated rights) to manage AD users and groups.
+5. updater.ps1
 
-## Usage
-Each script can be run individually by launching PowerShell as an administrator and running the respective script file. Ensure that you have the necessary prerequisites installed and configured on the system running these scripts.
+This script is used for performing regular maintenance tasks on remote Windows servers, checking services, installing updates, and scheduling reboots.
+Features:
 
-```bash
-# Example of running bulkuser4.ps1
-.\bulkuser4.ps1
-```
+    Check Installed Services: Retrieves the status of all installed services on specified remote servers.
+    Conditional Software Updates: Installs software updates if the W32Time (Windows Time) service is running on the server.
+    Reboot Management: Reboots the server immediately or schedules a reboot for a later time based on user input.
+    Error Handling: Implements error handling using try...catch blocks to manage exceptions gracefully.
+    Scheduled Task Setup: Automatically creates a scheduled task to run the script weekly.
 
-## Error Handling
-All scripts implement error handling using `try...catch` blocks to ensure that any issues encountered during execution are logged and handled gracefully.
+Usage:
 
-## Contributing
+    Define Remote Servers:
+
+    Modify the $servers array in the script to include the names of your remote servers:
+
+    powershell
+
+$servers = @("THOKJE-DC01", "THOKJE-WS01")
+
+Adjust Script Path:
+
+Update the $scriptPath variable to point to the location where you will save the script:
+
+powershell
+
+$scriptPath = "C:\Scripts\updater.ps1"
+
+Run the Script:
+
+Execute the script with administrative privileges:
+
+powershell
+
+    .\updater.ps1
+
+    Scheduled Task:
+
+    The script will create a scheduled task named WeeklyServerMaintenance that runs the script weekly at 3 AM on Mondays. You can adjust the schedule by modifying the New-ScheduledTaskTrigger parameters in the Schedule-WeeklyTask function.
+
+Requirements:
+
+    PowerShell Remoting: Ensure that PowerShell Remoting is enabled on the remote servers (Enable-PSRemoting).
+    Firewall Settings: Configure firewall settings to allow PowerShell Remoting (usually TCP port 5985 for HTTP).
+    Administrative Privileges: You must run the script with an account that has administrative rights on the remote servers.
+    PSWindowsUpdate Module on Remote Servers: The script attempts to install the PSWindowsUpdate module on remote servers if it's not already installed. Remote servers need internet access to download modules from the PowerShell Gallery.
+
+Installation
+
+    Clone the Repository:
+
+    bash
+
+    git clone https://github.com/yourusername/ADAutomationScripts.git
+
+    Modify Scripts: Adjust the scripts as necessary to fit your environment.
+
+    Run Scripts: Execute the scripts with appropriate permissions.
+
+Requirements
+
+    PowerShell 5.0 or Later: Some cmdlets and parameters used in the scripts require PowerShell 5.0 or newer.
+    Active Directory Module: Install the Active Directory module for Windows PowerShell.
+    PSWindowsUpdate Module: Install the PSWindowsUpdate module to manage Windows Updates via PowerShell.
+
+Contributing
+
 Feel free to fork this repository and submit pull requests for any improvements or additional features you'd like to see.
+License
 
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-```
-
-### Key Points in the README:
-1. **Overview**: Explains what each script does, giving an idea of the automation tasks they handle.
-2. **Instructions**: Provides step-by-step instructions on how to use each script, including any modifications needed.
-3. **Usage Examples**: Shows how to run each script with appropriate permissions.
-4. **Error Handling**: Mentions the inclusion of error handling to deal with unexpected issues.
-5. **Export and Output**: Explains the export functionality for reports and user data.
-
-Let me know if you'd like to make further adjustments or if there’s anything specific you'd like to include in the README!
+This project is licensed under the MIT License. See the LICENSE file for details.
