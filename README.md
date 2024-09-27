@@ -116,9 +116,6 @@ This script collects DHCP lease information from multiple DHCP servers and expor
 The lease information will be saved in the specified CSV file for further analysis.
 ```
 
-This succinctly explains what the `DHCPLeases.ps1` script does, how to use it, and the expected output. Let me know if you'd like any changes!
----
-
 ## Installation
 
 1. **Clone the Repository**:
