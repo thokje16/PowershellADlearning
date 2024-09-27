@@ -77,6 +77,46 @@ This script is used for performing regular maintenance tasks on remote Windows s
 - **Administrative Privileges**: You must run the script with an account that has administrative rights on the remote servers.
 - **PSWindowsUpdate Module on Remote Servers**: The script attempts to install the `PSWindowsUpdate` module on remote servers if it's not already installed. Remote servers need internet access to download modules from the PowerShell Gallery.
 
+
+### 6. `DHCPLeases.ps1`
+
+This script collects DHCP lease information from multiple DHCP servers and exports it to a CSV file.
+
+#### Features:
+- Queries DHCP leases from multiple servers.
+- Includes details like DHCP server name, scope ID, IP address, hostname, client ID, and address state.
+- Exports the collected lease information to a CSV file.
+
+#### Usage:
+
+1. **Define DHCP Servers**:
+
+   Modify the `$DhcpServers` array to include your DHCP server names:
+
+   ```powershell
+   $DhcpServers = @("THOKJE-DC01", "THOKJE-DC02")
+   ```
+
+2. **Set Output Path**:
+
+   Define the CSV file path where the DHCP lease information will be saved:
+
+   ```powershell
+   $CsvFilePath = "C:\dhcp_leases.csv"
+   ```
+
+3. **Run the Script**:
+
+   Execute the script with administrative privileges:
+
+   ```powershell
+   .\DHCPLeases.ps1
+   ```
+
+The lease information will be saved in the specified CSV file for further analysis.
+```
+
+This succinctly explains what the `DHCPLeases.ps1` script does, how to use it, and the expected output. Let me know if you'd like any changes!
 ---
 
 ## Installation
